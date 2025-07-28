@@ -71,7 +71,7 @@ nba-headshots --help
 ```
 
 ## Example
-```
+```python
 from nba_summer_league_headshots import GLeagueAPI
 
 api = GLeagueAPI()
