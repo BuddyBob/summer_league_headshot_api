@@ -8,7 +8,7 @@ Get NBA Summer League player headshots
 pip install nba-summer-league-headshots
 ```
 
-## Quick Start
+## Basic
 
 ```python
 from nba_summer_league_headshots import get_headshot, get_headshots
@@ -24,9 +24,8 @@ print(f"Downloaded: {result['total_found']} players to {result['output_dir']}")
 ```
 
 
-## Advanced Features
+## Advanced 
 
-Need more control? Use the full API:
 
 ```python
 from nba_summer_league_headshots import GLeagueAPI
@@ -48,6 +47,10 @@ print(f"Players with 'James': {james_players}")
 
 # Copy individual headshots with custom directory
 headshot_path = api.copy_headshot("Bronny James", "./my_custom_folder")
+
+# Batch download multiple players' headshots
+result = api.batch_download(["Bronny James", "Dalton Knecht"], output_dir="./my_custom_folder")
+
 ```
 
 
@@ -68,8 +71,8 @@ nba-headshots search "James"
 - `get_headshots(player_names, output_dir="./headshots")` → Save multiple players' images
 
 ### Advanced API (GLeagueAPI)
-- `list_all_players()` → Get list of all players
-- `get_team(team_name)` → Get all players from a specific NBA team
-- `search_players(query)` → Find players by name (partial matching)
-- `copy_headshot(name, output_dir)` → Copy single player to custom directory
-- `batch_download(names, output_dir)` → Download multiple with detailed results
+- `list_all_players()` → Get list of all players 
+- `get_team(team_name)` → Get all players from a specific NBA team -> type: string
+- `search_players(query)` → Find players by name -> type: string
+- `copy_headshot(name, output_dir)` → Copy single player to custom directory -> type: string, output_dir: string
+- `batch_download(names, output_dir)` → Download multiple with detailed results -> type: list, output_dir: string
