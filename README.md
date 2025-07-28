@@ -95,4 +95,3 @@ result = api.batch_download(all_players, output_dir="./my_custom_folder")
 - `search_players(query)` → Find players by name -> type: string
 - `copy_headshot(name, output_dir)` → Copy single player to custom directory -> type: string, output_dir: string
 - `batch_download(names, output_dir)` → Download multiple with detailed results -> type: list, output_dir: string
-```
