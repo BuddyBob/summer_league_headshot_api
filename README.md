@@ -49,16 +49,6 @@ nba-headshots random
 nba-headshots search "Cooper"
 ```
 
-## Features
-
-- **700+ Player Headshots**: Comprehensive collection of NBA Summer League players
-- **Easy Python API**: Simple functions to access player headshots
-- **Command Line Interface**: Use from terminal for quick access
-- **Search Functionality**: Find players by partial name matching
-- **Random Player Selection**: Get random player headshots
-- **Bundled Images**: All headshots included in the package
-
-
 ### Advanced Usage
 
 ```python
@@ -102,12 +92,6 @@ nba-headshots --download "Javan Johnson" "Ben Gregg" --output ./my_headshots
 nba-headshots --list
 ```
 
-## Dataset
-
-- **Total Players**: 431
-- **Teams**: All 30 NBA teams
-- **File Formats**: PNG (NBA official), JPG (community sources)
-- **Location**: `NBA_Combined_Headshots/`
 
 ## Methods
 
