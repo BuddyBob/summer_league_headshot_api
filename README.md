@@ -58,23 +58,6 @@ nba-headshots search "Cooper"
 - **Random Player Selection**: Get random player headshots
 - **Bundled Images**: All headshots included in the package
 
-## Data Sources
-
-The headshots are collected from multiple sources:
-- NBA Official API
-- RealGM
-- Other publicly available sources
-
-## Package Structure
-
-```
-nba_summer_league_headshots/
-├── __init__.py          # Main API functions
-├── api.py              # Core functionality
-├── cli.py              # Command line interface
-├── NBA_Roster_Clean.csv # Player data
-└── NBA_Combined_Headshots/ # All player headshots
-```
 
 ### Advanced Usage
 
