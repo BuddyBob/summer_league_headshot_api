@@ -152,6 +152,28 @@ class GLeagueAPI:
             if self._find_headshot(player['clean_name']):
                 available.append(player['name'])
         return sorted(available)
+    
+    def copy_headshot(self, name: str, output_dir: str = "./headshots") -> Optional[str]:
+        """
+        Copy a player's headshot to specified directory.
+        
+        Args:
+            name: Player full name
+            output_dir: Directory to copy the headshot to (default: "./headshots")
+            
+        Returns:
+            Path to copied file, or None if player not found
+        """
+        headshot_path = self.get_player(name)
+        if headshot_path:
+            output_path = Path(output_dir)
+            output_path.mkdir(exist_ok=True)
+            
+            source = Path(headshot_path)
+            dest = output_path / source.name
+            shutil.copy2(source, dest)
+            return str(dest)
+        return None
 
 def get_headshot(player_name: str) -> Optional[str]:
     """
@@ -179,6 +201,20 @@ def download_players(player_names: List[str], output_dir: str = "./downloaded_he
     """
     api = GLeagueAPI()
     return api.batch_download(player_names, output_dir)
+
+def copy_headshot(player_name: str, output_dir: str = "./headshots") -> Optional[str]:
+    """
+    Copy a player's headshot to your local directory.
+    
+    Args:
+        player_name: Player full name
+        output_dir: Directory to copy to (default: "./headshots")
+        
+    Returns:
+        Path to copied file or None if not found
+    """
+    api = GLeagueAPI()
+    return api.copy_headshot(player_name, output_dir)
 
 # Example usage
 if __name__ == "__main__":

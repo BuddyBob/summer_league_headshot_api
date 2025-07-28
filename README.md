@@ -13,17 +13,23 @@ pip install nba-summer-league-headshots
 ### Python API
 
 ```python
-from nba_summer_league_headshots import get_headshot, download_players
+from nba_summer_league_headshots import get_headshot, copy_headshot, download_players
 
-# Get a specific player's headshot
+# Get path to a player's headshot (in package installation directory)
 headshot_path = get_headshot("Bronny James")
 print(f"Bronny James headshot: {headshot_path}")
+
+# Copy a player's headshot to your local directory
+local_path = copy_headshot("Bronny James", "./my_headshots")
+print(f"Copied to: {local_path}")
 
 # Download multiple players to a directory
 players = ["Bronny James", "Dalton Knecht", "Reed Sheppard"]
 result = download_players(players, "./my_headshots")
 print(f"Downloaded: {result['total_found']}, Missing: {result['total_missing']}")
 ```
+
+> **Note**: `get_headshot()` returns the path to the image in the package installation directory. Use `copy_headshot()` to copy the image to your local working directory for easier access.
 
 ### Command Line Interface
 
@@ -76,6 +82,9 @@ The headshots are collected from multiple sources:
 
 | Method | Description | Returns |
 |--------|-------------|---------|
+| `get_headshot(name)` | Get player headshot path (package location) | `str` or `None` |
+| `copy_headshot(name, output_dir)` | Copy headshot to local directory | `str` or `None` |
+| `download_players(names, output_dir)` | Download multiple players | `Dict` with results |
 | `get_player(name)` | Get single player headshot path | `str` or `None` |
 | `get_team(team_name)` | Get all players from team | `List[Dict]` |
 | `batch_download(names, output_dir)` | Download multiple players | `Dict` with results |
