@@ -13,24 +13,16 @@ pip install nba-summer-league-headshots
 ### Python API
 
 ```python
-from nba_summer_league_headshots import get_headshot, list_players, get_random_headshot
+from nba_summer_league_headshots import get_headshot, download_players
 
 # Get a specific player's headshot
 headshot_path = get_headshot("Bronny James")
 print(f"Bronny James headshot: {headshot_path}")
 
-# List all available players
-players = list_players()
-print(f"Total players: {len(players)}")
-
-# Get a random player headshot
-random_player, random_path = get_random_headshot()
-print(f"Random player: {random_player} - {random_path}")
-
-# Search for players
-from nba_summer_league_headshots import search_players
-results = search_players("James")
-print(f"Players with 'James' in name: {results}")
+# Download multiple players to a directory
+players = ["Bronny James", "Dalton Knecht", "Reed Sheppard"]
+result = download_players(players, "./my_headshots")
+print(f"Downloaded: {result['total_found']}, Missing: {result['total_missing']}")
 ```
 
 ### Command Line Interface
@@ -73,25 +65,21 @@ result = api.batch_download(["Player 1", "Player 2"], "./output")
 print(f"Downloaded: {result['total_found']}, Missing: {result['total_missing']}")
 ```
 
-### Command Line Interface
+## Features
 
-```bash
-# Get a player's headshot path
-nba-headshots --player "Javan Johnson"
+- **700+ Player Headshots**: Comprehensive collection of NBA Summer League players
+- **Easy Python API**: Simple functions to access player headshots
+- **Command Line Interface**: Use from terminal for quick access
+- **Search Functionality**: Find players by partial name matching
+- **Random Player Selection**: Get random player headshots
+- **Bundled Images**: All headshots included in the package
 
-# List all players from a team
-nba-headshots --team "Atlanta Hawks"
+## Data Sources
 
-# Search for players
-nba-headshots --search "johnson"
-
-# Download specific players
-nba-headshots --download "Javan Johnson" "Ben Gregg" --output ./my_headshots
-
-# List all available players
-nba-headshots --list
-```
-
+The headshots are collected from multiple sources:
+- NBA Official API
+- RealGM
+- Other publicly available sources
 
 ## Methods
 
