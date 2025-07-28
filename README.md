@@ -1,27 +1,85 @@
-# NBA Summer League 2025 Player Headshots
+# NBA Summer League Headshots
 
-A Python API for accessing NBA Summer League 2025 player headshots. Contains 431 verified player images across all 30 NBA teams.
+A comprehensive collection of NBA Summer League player headshots with an easy-to-use Python API.
 
+## Installation
+
+```bash
+pip install nba-summer-league-headshots
+```
 
 ## Usage
 
-### Basic Usage
+### Python API
 
 ```python
-from gleague_api import get_headshot, download_players
+from nba_summer_league_headshots import get_headshot, list_players, get_random_headshot
 
-# Get single player headshot path
-headshot_path = get_headshot("Javan Johnson")
+# Get a specific player's headshot
+headshot_path = get_headshot("Bronny James")
+print(f"Bronny James headshot: {headshot_path}")
 
-# Batch download multiple players
-players = ["Javan Johnson", "Ben Gregg", "Dwight Murray, Jr."]
-result = download_players(players, "./output_directory")
+# List all available players
+players = list_players()
+print(f"Total players: {len(players)}")
+
+# Get a random player headshot
+random_player, random_path = get_random_headshot()
+print(f"Random player: {random_player} - {random_path}")
+
+# Search for players
+from nba_summer_league_headshots import search_players
+results = search_players("James")
+print(f"Players with 'James' in name: {results}")
+```
+
+### Command Line Interface
+
+```bash
+# Get a player's headshot
+nba-headshots get "Bronny James"
+
+# List all players
+nba-headshots list
+
+# Get a random player
+nba-headshots random
+
+# Search for players
+nba-headshots search "Cooper"
+```
+
+## Features
+
+- **700+ Player Headshots**: Comprehensive collection of NBA Summer League players
+- **Easy Python API**: Simple functions to access player headshots
+- **Command Line Interface**: Use from terminal for quick access
+- **Search Functionality**: Find players by partial name matching
+- **Random Player Selection**: Get random player headshots
+- **Bundled Images**: All headshots included in the package
+
+## Data Sources
+
+The headshots are collected from multiple sources:
+- NBA Official API
+- RealGM
+- Other publicly available sources
+
+## Package Structure
+
+```
+nba_summer_league_headshots/
+├── __init__.py          # Main API functions
+├── api.py              # Core functionality
+├── cli.py              # Command line interface
+├── NBA_Roster_Clean.csv # Player data
+└── NBA_Combined_Headshots/ # All player headshots
 ```
 
 ### Advanced Usage
 
 ```python
-from gleague_api import GLeagueAPI
+from nba_summer_league_headshots import GLeagueAPI
 
 api = GLeagueAPI()
 
@@ -40,6 +98,25 @@ all_players = api.list_all_players()
 # Batch download with results
 result = api.batch_download(["Player 1", "Player 2"], "./output")
 print(f"Downloaded: {result['total_found']}, Missing: {result['total_missing']}")
+```
+
+### Command Line Interface
+
+```bash
+# Get a player's headshot path
+nba-headshots --player "Javan Johnson"
+
+# List all players from a team
+nba-headshots --team "Atlanta Hawks"
+
+# Search for players
+nba-headshots --search "johnson"
+
+# Download specific players
+nba-headshots --download "Javan Johnson" "Ben Gregg" --output ./my_headshots
+
+# List all available players
+nba-headshots --list
 ```
 
 ## Dataset
