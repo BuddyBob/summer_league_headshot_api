@@ -175,9 +175,9 @@ class GLeagueAPI:
             return str(dest)
         return None
 
-def get_headshot(player_name: str) -> Optional[str]:
+def get_headshot_path(player_name: str) -> Optional[str]:
     """
-    Quick function to get a player's headshot path.
+    Internal function to get player's headshot path in package directory.
     
     Args:
         player_name: Player full name
@@ -188,30 +188,30 @@ def get_headshot(player_name: str) -> Optional[str]:
     api = GLeagueAPI()
     return api.get_player(player_name)
 
-def download_players(player_names: List[str], output_dir: str = "./downloaded_headshots") -> Dict:
+def get_headshots(player_names: List[str], output_dir: str = "./headshots") -> Dict:
     """
-    Quick function to batch download player headshots.
+    Get multiple player headshots and save them to your local directory.
     
     Args:
         player_names: List of player names to download
-        output_dir: Directory to save images (default: "./downloaded_headshots")
+        output_dir: Directory to save images (default: "./headshots")
         
     Returns:
-        Download results dictionary
+        Dictionary with download results
     """
     api = GLeagueAPI()
     return api.batch_download(player_names, output_dir)
 
-def copy_headshot(player_name: str, output_dir: str = "./headshots") -> Optional[str]:
+def get_headshot(player_name: str, output_dir: str = "./headshots") -> Optional[str]:
     """
-    Copy a player's headshot to your local directory.
+    Get a player's headshot and save it to your local directory.
     
     Args:
         player_name: Player full name
-        output_dir: Directory to copy to (default: "./headshots")
+        output_dir: Directory to save the image (default: "./headshots")
         
     Returns:
-        Path to copied file or None if not found
+        Path to saved file or None if player not found
     """
     api = GLeagueAPI()
     return api.copy_headshot(player_name, output_dir)

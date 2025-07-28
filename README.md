@@ -1,6 +1,6 @@
 # NBA Summer League Headshots
 
-A comprehensive collection of NBA Summer League player headshots with an easy-to-use Python API.
+Get NBA Summer League player headshots 
 
 ## Installation
 
@@ -8,107 +8,68 @@ A comprehensive collection of NBA Summer League player headshots with an easy-to
 pip install nba-summer-league-headshots
 ```
 
-## Usage
-
-### Python API
+## Quick Start
 
 ```python
-from nba_summer_league_headshots import get_headshot, copy_headshot, download_players
+from nba_summer_league_headshots import get_headshot, get_headshots
 
-# Get path to a player's headshot (in package installation directory)
-headshot_path = get_headshot("Bronny James")
-print(f"Bronny James headshot: {headshot_path}")
+# Get one player's headshot
+image_path = get_headshot("Bronny James")
+print(f"Saved to: {image_path}")
 
-# Copy a player's headshot to your local directory
-local_path = copy_headshot("Bronny James", "./my_headshots")
-print(f"Copied to: {local_path}")
-
-# Download multiple players to a directory
+# Get multiple players' headshots  
 players = ["Bronny James", "Dalton Knecht", "Reed Sheppard"]
-result = download_players(players, "./my_headshots")
-print(f"Downloaded: {result['total_found']}, Missing: {result['total_missing']}")
+result = get_headshots(players)
+print(f"Downloaded: {result['total_found']} players to {result['output_dir']}")
 ```
 
-> **Note**: `get_headshot()` returns the path to the image in the package installation directory. Use `copy_headshot()` to copy the image to your local working directory for easier access.
 
-### Command Line Interface
+## Advanced Features
 
-```bash
-# Get a player's headshot
-nba-headshots get "Bronny James"
-
-# List all players
-nba-headshots list
-
-# Get a random player
-nba-headshots random
-
-# Search for players
-nba-headshots search "Cooper"
-```
-
-### Advanced Usage
+Need more control? Use the full API:
 
 ```python
 from nba_summer_league_headshots import GLeagueAPI
 
 api = GLeagueAPI()
 
-# Get player headshot
-headshot = api.get_player("Player Name")
-
-# Get all players from a team
-team_players = api.get_team("Atlanta Hawks")
-
-# Search players by name
-matches = api.search_players("johnson")
-
 # List all available players
 all_players = api.list_all_players()
+print(f"Total players: {len(all_players)}")
 
-# Batch download with results
-result = api.batch_download(["Player 1", "Player 2"], "./output")
-print(f"Downloaded: {result['total_found']}, Missing: {result['total_missing']}")
+# Get all players from a specific team
+hawks_players = api.get_team("Atlanta Hawks")
+for player in hawks_players:
+    print(f"{player['name']} - {player['team']}")
+
+# Search for players by name
+james_players = api.search_players("James")
+print(f"Players with 'James': {james_players}")
+
+# Copy individual headshots with custom directory
+headshot_path = api.copy_headshot("Bronny James", "./my_custom_folder")
 ```
 
-## Data Sources
 
-The headshots are collected from multiple sources:
-- NBA Official API
-- RealGM
-- Other publicly available sources
+## Command Line Usage
 
-## Methods
+```bash
+# Get a player's headshot
+nba-headshots get "Bronny James"
 
-| Method | Description | Returns |
-|--------|-------------|---------|
-| `get_headshot(name)` | Get player headshot path (package location) | `str` or `None` |
-| `copy_headshot(name, output_dir)` | Copy headshot to local directory | `str` or `None` |
-| `download_players(names, output_dir)` | Download multiple players | `Dict` with results |
-| `get_player(name)` | Get single player headshot path | `str` or `None` |
-| `get_team(team_name)` | Get all players from team | `List[Dict]` |
-| `batch_download(names, output_dir)` | Download multiple players | `Dict` with results |
-| `search_players(query)` | Search players by name | `List[str]` |
-| `list_all_players()` | List all available players | `List[str]` |
-
-## Data Structure
-
-Player objects contain:
-```python
-{
-    'name': 'Player Name',
-    'team': 'Team Name', 
-    'headshot_path': '/path/to/image.jpg'
-}
+# Search for players
+nba-headshots search "James"
 ```
 
-Batch download results:
-```python
-{
-    'found': [{'name': 'Player', 'file': '/path/to/copy.jpg'}],
-    'not_found': ['Missing Player'],
-    'total_found': 2,
-    'total_missing': 1,
-    'output_dir': '/output/path'
-}
-```
+## API Reference
+
+### Simple Functions
+- `get_headshot(player_name, output_dir="./headshots")` → Save one player's image
+- `get_headshots(player_names, output_dir="./headshots")` → Save multiple players' images
+
+### Advanced API (GLeagueAPI)
+- `list_all_players()` → Get list of all players
+- `get_team(team_name)` → Get all players from a specific NBA team
+- `search_players(query)` → Find players by name (partial matching)
+- `copy_headshot(name, output_dir)` → Copy single player to custom directory
+- `batch_download(names, output_dir)` → Download multiple with detailed results
