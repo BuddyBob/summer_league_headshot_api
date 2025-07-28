@@ -65,15 +65,6 @@ result = api.batch_download(["Player 1", "Player 2"], "./output")
 print(f"Downloaded: {result['total_found']}, Missing: {result['total_missing']}")
 ```
 
-## Features
-
-- **700+ Player Headshots**: Comprehensive collection of NBA Summer League players
-- **Easy Python API**: Simple functions to access player headshots
-- **Command Line Interface**: Use from terminal for quick access
-- **Search Functionality**: Find players by partial name matching
-- **Random Player Selection**: Get random player headshots
-- **Bundled Images**: All headshots included in the package
-
 ## Data Sources
 
 The headshots are collected from multiple sources:
