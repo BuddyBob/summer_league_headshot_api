@@ -54,15 +54,34 @@ result = api.batch_download(["Bronny James", "Dalton Knecht"], output_dir="./my_
 ```
 
 
-## Command Line Usage
+## Command Line
 
 ```bash
-# Get a player's headshot
-nba-headshots get "Bronny James"
+# Download player headshots
+nba-headshots -d "Bronny James" "Dalton Knecht"
 
-# Search for players
-nba-headshots search "James"
+# Search players  
+nba-headshots -s "James"
+
+# List team players
+nba-headshots -t "Atlanta Hawks"
+
+# See all options
+nba-headshots --help
 ```
+
+## Example
+```
+from nba_summer_league_headshots import GLeagueAPI
+
+api = GLeagueAPI()
+
+# List all available players
+all_players = api.list_all_players()
+result = api.batch_download(all_players, output_dir="./my_custom_folder")
+
+```
+
 
 ## API Reference
 
@@ -76,3 +95,4 @@ nba-headshots search "James"
 - `search_players(query)` → Find players by name -> type: string
 - `copy_headshot(name, output_dir)` → Copy single player to custom directory -> type: string, output_dir: string
 - `batch_download(names, output_dir)` → Download multiple with detailed results -> type: list, output_dir: string
+```
