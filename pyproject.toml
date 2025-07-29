@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nba-summer-league-headshots"
-version = "1.0.0"
+version = "1.0.1"
 description = "NBA Summer League 2025 Player Headshots API - Access 431+ verified player images"
 readme = "README.md"
 requires-python = ">=3.8"
